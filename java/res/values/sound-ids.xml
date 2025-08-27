@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--CHERRY BLUE MX SWITCHES SOUND EFFECTS-->
+    <integer-array name="blue_keypress_sound_res_ids">
+        <item>@raw/blue_keypress_0</item>
+        <item>@raw/blue_keypress_1</item>
+        <item>@raw/blue_keypress_2</item>
+        <item>@raw/blue_keypress_3</item>
+        <item>@raw/blue_keypress_4</item>
+        <item>@raw/blue_keypress_5</item>
+        <item>@raw/blue_keypress_6</item>
+        <item>@raw/blue_keypress_7</item>
+        <item>@raw/blue_keypress_8</item>
+        <item>@raw/blue_keypress_9</item>
+        <item>@raw/blue_keypress_10</item>
+        <item>@raw/blue_keypress_11</item>
+        <item>@raw/blue_keypress_12</item>
+        <item>@raw/blue_keypress_13</item>
+        <item>@raw/blue_keypress_14</item>
+        <item>@raw/blue_keypress_15</item>
+        <item>@raw/blue_keypress_16</item>
+        <item>@raw/blue_keypress_17</item>
+        <item>@raw/blue_keypress_18</item>
+        <item>@raw/blue_keypress_19</item>
+        <item>@raw/blue_keypress_20</item>
+        <item>@raw/blue_keypress_21</item>
+        <item>@raw/blue_keypress_22</item>
+        <item>@raw/blue_keypress_23</item>
+        <item>@raw/blue_keypress_24</item>
+        <item>@raw/blue_keypress_25</item>
+    </integer-array>
+    <integer-array name ="blue_special_sound_res_ids">
+        <item>@raw/blue_delete</item>
+        <item>@raw/blue_space</item>
+        <item>@raw/blue_enter</item>
+    </integer-array>
+
+
+<!--CHERRY REX MX SWITCHES SOUND EFFECTS
+Still to be added;
+-->
+</resources>
+

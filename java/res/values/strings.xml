@@ -274,4 +274,9 @@ mobile devices. [CHAR LIMIT=25] -->
          This resource is copied from packages/apps/Settings/res/values/strings.xml -->
     <!-- This resource is corresponding to msgid="5433275485499039199" -->
     <string name="user_dict_fast_scroll_alphabet">\u0020ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <!-- STRINGS FOR CUSTOM SOUND PROFILE -->
+    <string name="pref_sound_profile_title">Sound Profile</string>
+    <string name="sound_profile_default">Default</string>
+    <string name="sound_profile_blue">Blue MX (clicky)</string>
+    <string name="sound_profile_red">Red MX (smooth)</string>
 </resources>
