@@ -17,6 +17,7 @@
 package org.futo.inputmethod.latin;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
@@ -33,6 +34,7 @@ import java.util.HashMap;
 import java.lang.Integer;
 import org.futo.inputmethod.latin.settings.Settings;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.content.Context;
 import android.util.Log;
 
@@ -56,8 +58,14 @@ public final class AudioAndHapticFeedbackManager {
     private int mExpectedSoundCount = 0;
     private int mLoadedSoundCount = 0;
     private static final String TAG = "AudioFeedbackManager";
+    private int deleteSoundId;
+    private int enterSoundId;
+    private int spaceSoundId;
+    private int[] keypressSoundId;
+    private int numberOfUniqueSounds;
     private static final AudioAndHapticFeedbackManager sInstance =
             new AudioAndHapticFeedbackManager();
+
 
     public static AudioAndHapticFeedbackManager getInstance() {
         return sInstance;
@@ -92,13 +100,25 @@ public final class AudioAndHapticFeedbackManager {
                 Log.d(TAG, "Sound loaded: " + sampleId +
                         " (" + mLoadedSoundCount + "/" + mExpectedSoundCount + ")");
                 if (mLoadedSoundCount >= mExpectedSoundCount) {
-                    mSoundsLoaded = true;
+                    mapAllSounds();
                     Log.i(TAG, "All sounds loaded successfully");
                 }
             } else {
                 Log.e(TAG, "Error loading sound " + sampleId + ", status: " + status);
             }
         });
+    }
+    private void mapAllSounds() {
+        mSoundMap.put(Constants.CODE_DELETE, deleteSoundId);
+        mSoundMap.put(Constants.CODE_ENTER, enterSoundId);
+        mSoundMap.put(Constants.CODE_SPACE, spaceSoundId);
+
+        for (int asciiCode = 33; asciiCode <= 255; asciiCode++) {
+            int soundIndex = (asciiCode - 33) % numberOfUniqueSounds; // cycles automatically
+            Log.i(TAG, "Mapping code: " + asciiCode + " to " + keypressSoundId[soundIndex]);
+            mSoundMap.put(asciiCode, keypressSoundId[soundIndex]);
+        }
+        mSoundsLoaded = true;
     }
 
     private void loadSoundsForCurrentProfile() {
@@ -119,15 +139,20 @@ public final class AudioAndHapticFeedbackManager {
             int enterSoundResId = 0;
             int spaceSoundResId = 0;
             int[] keypressSoundResIds;
-
+            TypedArray ta;
             switch (mSettingsValues.mCustomKeypressSoundsProfile) {
                 case Settings.BLUE_KEYPRESS_PROFILE: // blue profile
                     Log.i(TAG, "Using 'blue' sound profile.");
                     deleteSoundResId = R.raw.blue_delete;
                     enterSoundResId = R.raw.blue_enter;
                     spaceSoundResId = R.raw.blue_space;
-                    keypressSoundResIds = res.getIntArray(R.array.blue_keypress_sound_res_ids);
-                break;
+                    ta = res.obtainTypedArray(R.array.blue_keypress_sound_res_ids);
+                    keypressSoundResIds = new int[ta.length()];
+                    for (int i = 0; i < ta.length(); i++) {
+                        keypressSoundResIds[i] = ta.getResourceId(i, 0);
+                    }
+                    ta.recycle();
+                    break;
                 case Settings.RED_KEYPRESS_PROFILE: // red profile
                     Log.i(TAG, "Using 'default' sound profile.");
                     deleteSoundResId = R.raw.default_delete;
@@ -141,30 +166,23 @@ public final class AudioAndHapticFeedbackManager {
                 break;
             }
             if (keypressSoundResIds[0] == 0){
+                Log.i(TAG, "Exiting because keypresSoundResIds = 0");
                 return;
             }
             mExpectedSoundCount = keypressSoundResIds.length + 3;
             //Loading Sounds
-            int deleteSoundId = mSoundPool.load(mContext, deleteSoundResId, 1);
-            int enterSoundId = mSoundPool.load(mContext, enterSoundResId, 1);
-            int spaceSoundId = mSoundPool.load(mContext, spaceSoundResId, 1);
-            for (int soundResId : keypressSoundResIds) {
+
+            deleteSoundId = mSoundPool.load(mContext, deleteSoundResId, 1);
+            enterSoundId = mSoundPool.load(mContext, enterSoundResId, 1);
+            spaceSoundId = mSoundPool.load(mContext, spaceSoundResId, 1);
+            numberOfUniqueSounds = keypressSoundResIds.length;
+
+            keypressSoundId = new int[numberOfUniqueSounds];
+            int currentIndex = 0;
+            for (Integer soundResId : keypressSoundResIds) {
                 Log.i(TAG, "Loading sound: " + soundResId);
-                mSoundPool.load(mContext, soundResId, 1);
-            }
-            //MAPPING
-            mSoundMap.put(Constants.CODE_DELETE, deleteSoundId);
-            mSoundMap.put(Constants.CODE_ENTER, enterSoundId);
-            mSoundMap.put(Constants.CODE_SPACE, spaceSoundId);
-            int subtractor = 33; // ASCII code for space + 1, i.e. space is excluded
-            int numberOfUniqueSounds = keypressSoundResIds.length;
-            int indexOfFinalSound = keypressSoundResIds.length - 1;
-            for (int asciiCode=33; asciiCode<=255; asciiCode++) {
-                Log.i(TAG, "Mapping code: " + asciiCode + " to " + keypressSoundResIds[asciiCode - subtractor]);
-                mSoundMap.put(asciiCode, keypressSoundResIds[asciiCode - subtractor]);
-                if (asciiCode - subtractor == indexOfFinalSound) {
-                    subtractor += numberOfUniqueSounds;
-                }
+                keypressSoundId[currentIndex] = mSoundPool.load(mContext, soundResId, 1);
+                currentIndex += 1;
             }
 
         } catch (Resources.NotFoundException e) {
