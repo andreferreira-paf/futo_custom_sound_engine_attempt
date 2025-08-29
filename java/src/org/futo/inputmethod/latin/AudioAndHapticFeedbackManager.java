@@ -53,6 +53,7 @@ public final class AudioAndHapticFeedbackManager {
     // New variables for custom sound engine
     private SoundPool mSoundPool;
     private HashMap<Integer, Integer> mSoundMap = new HashMap<>();
+    private int mLastSelectedProfile;
     private boolean mSoundsLoaded = false;
     private Context mContext;
     private int mExpectedSoundCount = 0;
@@ -152,6 +153,7 @@ public final class AudioAndHapticFeedbackManager {
                         keypressSoundResIds[i] = ta.getResourceId(i, 0);
                     }
                     ta.recycle();
+                    mLastSelectedProfile = Settings.BLUE_KEYPRESS_PROFILE;
                     break;
                 case Settings.RED_KEYPRESS_PROFILE: // red profile
                     Log.i(TAG, "Using 'default' sound profile.");
@@ -159,10 +161,12 @@ public final class AudioAndHapticFeedbackManager {
                     enterSoundResId = R.raw.default_enter;
                     spaceSoundResId = R.raw.default_space;
                     keypressSoundResIds = new int[] { R.raw.default_keypress };
+                    mLastSelectedProfile = Settings.RED_KEYPRESS_PROFILE;
                 break;
                 default: // Fallback to old method, loading nothing
                     Log.i(TAG, "FALLBACK TO DEFAULT METHOD");
                     keypressSoundResIds = new int[] {0};
+                    mLastSelectedProfile = Settings.DEFAULT_KEYPRESS_PROFILE;
                 break;
             }
             if (keypressSoundResIds[0] == 0){
@@ -274,7 +278,9 @@ public final class AudioAndHapticFeedbackManager {
     public void onSettingsChanged(final SettingsValues settingsValues) {
         mSettingsValues = settingsValues;
         mSoundOn = reevaluateIfSoundIsOn();
-        loadSoundsForCurrentProfile();
+        if (mSettingsValues.mCustomKeypressSoundsProfile != mLastSelectedProfile) {
+            loadSoundsForCurrentProfile();
+        }
     }
 
     public void onRingerModeChanged() {
