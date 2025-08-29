@@ -615,7 +615,7 @@ val LongPressMenu = UserSettingsMenu(
 )
 @Composable
 private fun SoundProfileSettingItem() {
-    val SoundProfile = useSharedPrefsInt(Settings.PREF_CUSTOM_KEYPRESS_PROFILE!!, Settings.DEFAULT_KEYPRESS_PROFILE)
+    val soundProfile = useSharedPrefsInt(Settings.PREF_CUSTOM_KEYPRESS_PROFILE, Settings.DEFAULT_KEYPRESS_PROFILE)
 
     val soundProfileList = mapOf(
         Settings.DEFAULT_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_default),
@@ -626,17 +626,16 @@ private fun SoundProfileSettingItem() {
     DropDownPickerSettingItem(
         label = stringResource(R.string.pref_sound_profile_title),
         options = soundProfileList.keys.toList(),
-        selection = SoundProfile.value,    // Currently selected key (e.g., "blue")
+        selection = soundProfile.value,    // Currently selected key (e.g., "blue")
         onSet = {
-            SoundProfile.setValue(it)
-            Log.d("SoundProfile", "Sound profile set to: ??")
+            soundProfile.setValue(it)
             // Optional: Trigger sound engine reload here if needed immediately
         },
         getDisplayName = {
             soundProfileList[it] ?: "?" // Efficiently look up pre-resolved display name
         },
         icon = {
-            Icon(painterResource(R.drawable.space), contentDescription = null)
+            Icon(painterResource(R.drawable.settings), contentDescription = null)
         }
     )
 }
