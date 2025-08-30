@@ -1,6 +1,8 @@
 # FUTO Keyboard (with custom sound)
 
-This is a fork of the futo keyboard that adds the ability to use custom sounds for keyboard output.
+This is a fork of the futo keyboard that adds the ability to use custom sounds for keyboard output. But it doesn't let the user add custom sounds. A developer needs to come in and add the sounds themselves.
+
+Having users add their OWN custom sounds falls outside the scope of this project (at least for now), though that would be so effing cool, bro. For real for real. 
 
 Feel free to take have a look and test it out for yourself. The sounds are simple right now and not varied, but it's still fun to play with.
 
