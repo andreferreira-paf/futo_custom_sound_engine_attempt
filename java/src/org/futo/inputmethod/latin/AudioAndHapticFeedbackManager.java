@@ -115,13 +115,10 @@ public final class AudioAndHapticFeedbackManager {
     }
     private void mapAllSounds() {
         Resources res = mContext.getResources();
-        mSoundMap.put(Constants.CODE_DELETE, deleteSoundId);
-        mSoundMap.put(Constants.CODE_ENTER, enterSoundId);
-        mSoundMap.put(Constants.CODE_SPACE, spaceSoundId);
         int startCharacterCode = res.getInteger(R.integer.starting_latin_character_code);
         int endCharacterCode = res.getInteger(R.integer.ending_latin_character_code);
 
-        //MAPPING "NORMAL" CODES
+        //MAPPING LATIN CHARACTER CODES
         for (int characterCode = startCharacterCode; characterCode <= endCharacterCode; characterCode++) {
             int soundIndex = (characterCode - startCharacterCode) % numberOfUniqueSounds; // cycles automatically
             Log.i(TAG, "Mapping code: " + characterCode + " to " + keypressSoundId[soundIndex]);
@@ -134,6 +131,19 @@ public final class AudioAndHapticFeedbackManager {
             Log.i(TAG, "Mapping code: " + specialCharacterCodes[specialCharacterIndex] + " to " + keypressSoundId[soundIndex]);
             mSoundMap.put(specialCharacterCodes[specialCharacterIndex], keypressSoundId[soundIndex]);
         }
+        //  These have to be Mapped AFTER all the others because these
+        //  are actually being REmapped, i.e. they were mapped to soundIds
+        //  in the latin for-loop above, but I want to remap them to give them
+        //  their own special flavour.
+        //  You might be asking: Why not map them correctly to begin with
+        //  and avoid a remap?
+        //  My answer: I would have to put an if-statement in the for-loop just
+        //  for these special cases, and that seems costly. However, remapping
+        //  costs almost nothing...
+        mSoundMap.put(Constants.CODE_DELETE, deleteSoundId);
+        mSoundMap.put(Constants.CODE_ENTER, enterSoundId);
+        mSoundMap.put(Constants.CODE_SPACE, spaceSoundId);
+
         mSoundsLoaded = true;
     }
 

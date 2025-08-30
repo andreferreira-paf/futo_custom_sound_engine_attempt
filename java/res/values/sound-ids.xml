@@ -42,18 +42,18 @@ Still to be added;
 <!--These are not sound ids, but are data used by the new audio related code -->
 
 <!-- Special Characters' Codes -->
-    <integer-array name="special_character_codes_outside_latin_range">
-        <item>8226</item>
-        <item>8730</item>
-        <item>960</item>
-        <item>8710</item>
-        <item>8364</item>
-        <item>8482</item>
-        <item>8453</item>
-    </integer-array>
+<integer-array name="special_character_codes_outside_latin_range">
+    <item>8226</item>
+    <item>8730</item>
+    <item>960</item>
+    <item>8710</item>
+    <item>8364</item>
+    <item>8482</item>
+    <item>8453</item>
+</integer-array>
 
-<!-- Defining "Normal" range of Character codes -->
-    <integer name="starting_latin_character_code">-1</integer>
-    <integer name="ending_latin_character_code">591</integer>
+<!-- Defining Latin range of Character codes -->
+<integer name="starting_latin_character_code">-19</integer>
+<integer name="ending_latin_character_code">591</integer>
 </resources>
 
