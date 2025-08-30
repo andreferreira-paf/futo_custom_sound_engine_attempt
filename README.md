@@ -1,30 +1,20 @@
-# FUTO Keyboard
+# FUTO Keyboard (with custom sound)
 
-The goal is to make a good modern keyboard that stays offline and doesn't spy on you. This keyboard is a fork of [LatinIME, The Android Open-Source Keyboard](https://android.googlesource.com/platform/packages/inputmethods/LatinIME), with significant changes made to it.
+This is a fork of the futo keyboard that adds the ability to use custom sounds for keyboard output.
 
-Check out the [FUTO Keyboard website](https://keyboard.futo.org/) for downloads and more information.
+Feel free to take have a look and test it out for yourself. The sounds are simple right now and not varied, but it's still fun to play with.
 
-The code is licensed under the [FUTO Source First License 1.1](LICENSE.md).
 
-## Issue tracking and contributing
+### Known Issue(s):
+- Only latin characters are supported for now, i.e. Cyrillic, Japanese, Korean, etc. are not supported.
+- Red Switches profile still not working and has BRUH meme sound as placeholder lol.
 
-Please check the GitHub repository to report issues: [https://github.com/futo-org/android-keyboard/](https://github.com/futo-org/android-keyboard/)
 
-The source code is hosted on our [internal GitLab](https://gitlab.futo.org/keyboard/latinime) and mirrored to [GitHub](https://github.com/futo-org/android-keyboard/). As registration is closed on our internal GitLab, we use GitHub instead for issues and pull requests.
-
-Due to custom license, pull requests to this repository require signing a [CLA](https://cla.futo.org/) which you can do after opening a PR. Contributions to the [layouts repo](https://github.com/futo-org/futo-keyboard-layouts) don't require CLA as they're Apache-2.0
-
-If you want to help translate the app, please do so via our Pontoon instance: https://i18n-keyboard.futo.org/
-
-## Layouts
-
-If you want to contribute layouts, check out the [layouts repo](https://github.com/futo-org/futo-keyboard-layouts).
-
-## Building
+### Building
 
 When cloning the repository, you must perform a recursive clone to fetch all dependencies:
 ```
-git clone --recursive https://gitlab.futo.org/keyboard/latinime.git
+git clone --recursive https://github.com/andreferreira-paf/futo_custom_sound_engine_attempt.git
 ```
 
 If you forgot to specify recursive clone, use this to fetch submodules:
