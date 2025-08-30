@@ -81,7 +81,11 @@ public final class AudioAndHapticFeedbackManager {
     }
 
     private void initInternal(final Context context) {
+        //  Android Studio calls this line a memory leak, but it's not.
+        // it would only be a memory leak if it was storing ACTIVITY context,
+        // but it's storing APPLICATION context.
         mContext = context.getApplicationContext();
+
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -110,14 +114,25 @@ public final class AudioAndHapticFeedbackManager {
         });
     }
     private void mapAllSounds() {
+        Resources res = mContext.getResources();
         mSoundMap.put(Constants.CODE_DELETE, deleteSoundId);
         mSoundMap.put(Constants.CODE_ENTER, enterSoundId);
         mSoundMap.put(Constants.CODE_SPACE, spaceSoundId);
+        int startCharacterCode = res.getInteger(R.integer.starting_latin_character_code);
+        int endCharacterCode = res.getInteger(R.integer.ending_latin_character_code);
 
-        for (int asciiCode = 33; asciiCode <= 255; asciiCode++) {
-            int soundIndex = (asciiCode - 33) % numberOfUniqueSounds; // cycles automatically
-            Log.i(TAG, "Mapping code: " + asciiCode + " to " + keypressSoundId[soundIndex]);
-            mSoundMap.put(asciiCode, keypressSoundId[soundIndex]);
+        //MAPPING "NORMAL" CODES
+        for (int characterCode = startCharacterCode; characterCode <= endCharacterCode; characterCode++) {
+            int soundIndex = (characterCode - startCharacterCode) % numberOfUniqueSounds; // cycles automatically
+            Log.i(TAG, "Mapping code: " + characterCode + " to " + keypressSoundId[soundIndex]);
+            mSoundMap.put(characterCode, keypressSoundId[soundIndex]);
+        }
+        //MAPPING OUTLIER CODES
+        int[] specialCharacterCodes = res.getIntArray(R.array.special_character_codes_outside_latin_range);
+        for (int specialCharacterIndex = 0; specialCharacterIndex < specialCharacterCodes.length; specialCharacterIndex++){
+            int soundIndex = specialCharacterIndex % numberOfUniqueSounds; // cycles automatically
+            Log.i(TAG, "Mapping code: " + specialCharacterCodes[specialCharacterIndex] + " to " + keypressSoundId[soundIndex]);
+            mSoundMap.put(specialCharacterCodes[specialCharacterIndex], keypressSoundId[soundIndex]);
         }
         mSoundsLoaded = true;
     }
@@ -170,7 +185,7 @@ public final class AudioAndHapticFeedbackManager {
                 break;
             }
             if (keypressSoundResIds[0] == 0){
-                Log.i(TAG, "Exiting because keypresSoundResIds = 0");
+                Log.i(TAG, "Exiting because keypressSoundResIds = 0");
                 return;
             }
             mExpectedSoundCount = keypressSoundResIds.length + 3;
@@ -183,7 +198,7 @@ public final class AudioAndHapticFeedbackManager {
 
             keypressSoundId = new int[numberOfUniqueSounds];
             int currentIndex = 0;
-            for (Integer soundResId : keypressSoundResIds) {
+            for (int soundResId : keypressSoundResIds) {
                 Log.i(TAG, "Loading sound: " + soundResId);
                 keypressSoundId[currentIndex] = mSoundPool.load(mContext, soundResId, 1);
                 currentIndex += 1;
