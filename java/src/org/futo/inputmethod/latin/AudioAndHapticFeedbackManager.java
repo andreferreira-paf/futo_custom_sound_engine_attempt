@@ -95,7 +95,7 @@ public final class AudioAndHapticFeedbackManager {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
         mSoundPool = new SoundPool.Builder()
-                .setMaxStreams(4) // Max simultaneous sounds
+                .setMaxStreams(8) // Max simultaneous sounds
                 .setAudioAttributes(audioAttributes)
                 .build();
 
