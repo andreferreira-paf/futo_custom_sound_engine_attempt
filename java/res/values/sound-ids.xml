@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--CHERRY BLUE MX SWITCHES SOUND EFFECTS-->
+<!--CHERRYMX BLUE SWITCHES SOUND EFFECTS-->
     <integer-array name="blue_keypress_sound_res_ids">
         <item>@raw/blue_keypress_0</item>
         <item>@raw/blue_keypress_1</item>
@@ -36,11 +36,81 @@
     </integer-array>
 
 
-<!--CHERRY REX MX SWITCHES SOUND EFFECTS
-Still to be added;
+<!--CHERRYMX RED SWITCHES SOUND EFFECTS (UNCOMMENT WHEN READY)
+    <integer-array name="red_keypress_sound_res_ids">
+        <item>@raw/red_keypress_0</item>
+        <item>@raw/red_keypress_1</item>
+        <item>@raw/red_keypress_2</item>
+        <item>@raw/red_keypress_3</item>
+        <item>@raw/red_keypress_4</item>
+        <item>@raw/red_keypress_5</item>
+        <item>@raw/red_keypress_6</item>
+        <item>@raw/red_keypress_7</item>
+        <item>@raw/red_keypress_8</item>
+        <item>@raw/red_keypress_9</item>
+        <item>@raw/red_keypress_10</item>
+        <item>@raw/red_keypress_11</item>
+        <item>@raw/red_keypress_12</item>
+        <item>@raw/red_keypress_13</item>
+        <item>@raw/red_keypress_14</item>
+        <item>@raw/red_keypress_15</item>
+        <item>@raw/red_keypress_16</item>
+        <item>@raw/red_keypress_17</item>
+        <item>@raw/red_keypress_18</item>
+        <item>@raw/red_keypress_19</item>
+        <item>@raw/red_keypress_20</item>
+        <item>@raw/red_keypress_21</item>
+        <item>@raw/red_keypress_22</item>
+        <item>@raw/red_keypress_23</item>
+        <item>@raw/red_keypress_24</item>
+        <item>@raw/red_keypress_25</item>
+    </integer-array>
+    <integer-array name ="red_special_sound_res_ids">
+        <item>@raw/red_delete</item>
+        <item>@raw/red_space</item>
+        <item>@raw/red_enter</item>
+    </integer-array>
 -->
-<!--These are not sound ids, but are data used by the new audio related code -->
 
+<!--CHERRYMX BLACK SWITCHES SOUND EFFECTS (UNCOMMENT WHEN READY)
+    <integer-array name="black_keypress_sound_res_ids">
+        <item>@raw/black_keypress_0</item>
+        <item>@raw/black_keypress_1</item>
+        <item>@raw/black_keypress_2</item>
+        <item>@raw/black_keypress_3</item>
+        <item>@raw/black_keypress_4</item>
+        <item>@raw/black_keypress_5</item>
+        <item>@raw/black_keypress_6</item>
+        <item>@raw/black_keypress_7</item>
+        <item>@raw/black_keypress_8</item>
+        <item>@raw/black_keypress_9</item>
+        <item>@raw/black_keypress_10</item>
+        <item>@raw/black_keypress_11</item>
+        <item>@raw/black_keypress_12</item>
+        <item>@raw/black_keypress_13</item>
+        <item>@raw/black_keypress_14</item>
+        <item>@raw/black_keypress_15</item>
+        <item>@raw/black_keypress_16</item>
+        <item>@raw/black_keypress_17</item>
+        <item>@raw/black_keypress_18</item>
+        <item>@raw/black_keypress_19</item>
+        <item>@raw/black_keypress_20</item>
+        <item>@raw/black_keypress_21</item>
+        <item>@raw/black_keypress_22</item>
+        <item>@raw/black_keypress_23</item>
+        <item>@raw/black_keypress_24</item>
+        <item>@raw/black_keypress_25</item>
+    </integer-array>
+    <integer-array name ="black_special_sound_res_ids">
+        <item>@raw/black_delete</item>
+        <item>@raw/black_space</item>
+        <item>@raw/black_enter</item>
+    </integer-array>
+-->
+
+
+<!--NO sound ids after this point,
+these are data used by the new audio related code -->
 <!-- Special Characters' Codes -->
 <integer-array name="special_character_codes_outside_latin_range">
     <item>8226</item>

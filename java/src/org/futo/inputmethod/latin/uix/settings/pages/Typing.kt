@@ -620,7 +620,15 @@ private fun SoundProfileSettingItem() {
     val soundProfileList = mapOf(
         Settings.DEFAULT_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_default),
         Settings.BLUE_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_blue),
-        Settings.RED_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_red)
+        Settings.RED_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_red)//,
+/*  UNCOMMENT WHEN READY
+        Settings.BLACK_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_black)
+        Settings.TYPEWRITER_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_typewriter)
+        Settings.GREENTERMINAL_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_greenTerminal)
+        Settings.AHEGAO_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_ahegao)
+        Settings.SOULS_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_souls)
+        Settings.ODETOJOY_KEYPRESS_PROFILE to stringResource(R.string.sound_profile_ode)
+*/
     )
 
     DropDownPickerSettingItem(

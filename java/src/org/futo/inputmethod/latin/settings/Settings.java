@@ -54,11 +54,19 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_VIBRATE_ON = "vibrate_on";
     public static final String PREF_SOUND_ON = "sound_on";
     public static final String PREF_POPUP_ON = "popup_on";
-    // Custom Sound Stuff
+    // Custom Sound Profile Stuff
     public static final String PREF_CUSTOM_KEYPRESS_PROFILE = "pref_custom_keypress_profile";
     public static final int DEFAULT_KEYPRESS_PROFILE = 0;
     public static final int BLUE_KEYPRESS_PROFILE = 1;
     public static final int RED_KEYPRESS_PROFILE = 2;
+/*  // UNCOMMENT WHEN READY
+    public static final int BLACK_KEYPRESS_PROFILE = 3;
+    public static final int TYPEWRITER_KEYPRESS_PROFILE = 4;
+    public static final int GREENTERMINAL_KEYPRESS_PROFILE = 5;
+    public static final int AHEGAO_KEYPRESS_PROFILE = 6;
+    public static final int SOULS_KEYPRESS_PROFILE = 7;
+    public static final int ODETOJOY_KEYPRESS_PROFILE = 8;
+*/
     // PREF_VOICE_MODE_OBSOLETE is obsolete. Use PREF_VOICE_INPUT_KEY instead.
     public static final String PREF_VOICE_MODE_OBSOLETE = "voice_mode";
     public static final String PREF_VOICE_INPUT_KEY = "pref_voice_input_key";
